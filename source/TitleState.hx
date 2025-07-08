@@ -127,10 +127,10 @@ class TitleState extends MusicBeatState
 		#end
 		
 		#if MODS_ALLOWED
-		var path = if mobile Sys.getCwd() + #end "mods/" + Paths.currentModDirectory + "/images/gfDanceTitle.json";
+		var path = #if mobile Sys.getCwd() + #end "mods/" + Paths.currentModDirectory + "/images/gfDanceTitle.json";
 		//trace(path, FileSystem.exists(path));
 		if (!FileSystem.exists(path)) {
-			path = if mobile Sys.getCwd() + #end "mods/images/gfDanceTitle.json";
+			path = #if mobile Sys.getCwd() + #end "mods/images/gfDanceTitle.json";
 		}
 		//trace(path, FileSystem.exists(path));
 		if (!FileSystem.exists(path)) {
