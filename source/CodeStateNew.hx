@@ -253,11 +253,12 @@ class BloxiamSubstate extends MusicBeatSubstate
         add(image);
         
         addTouchPad("NONE", "B");
+		addTouchPadCamera();
 	}
 	
 	override public function update(elapsed:Float)
 	{
-		if (controls.BACK)
+		if (controls.BACK || touchPad.buttonB.justPressed)
 		{
 			FlxG.sound.play(Paths.sound('cancelMenu'));
 		    MusicBeatState.switchState(new CodeStateNew());
@@ -281,11 +282,12 @@ class PruimauamSubstate extends MusicBeatSubstate
         add(image);
         
         addTouchPad("NONE", "B");
+		addTouchPadCamera();
 	}
 	
 	override public function update(elapsed:Float)
 	{
-		if (controls.BACK)
+		if (controls.BACK || touchPad.buttonB.justPressed)
 		{
 			FlxG.sound.play(Paths.sound('cancelMenu'));
 		    MusicBeatState.switchState(new CodeStateNew());
