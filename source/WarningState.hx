@@ -11,12 +11,12 @@ import lime.app.Application;
 import flixel.addons.transition.FlxTransitionableState;
 import flixel.tweens.FlxTween;
 import flixel.util.FlxTimer;
+import openfl.utils.Assets as OpenFlAssets;
 
 class WarningState extends MusicBeatState
 {
 	public static var leftState:Bool = false;
 
-	var video:MP4Handler = new MP4Handler();
 	var warnText:FlxText;
 	var isCutscene:Bool = false;
 	var thesongnamename = '';
@@ -76,7 +76,7 @@ class WarningState extends MusicBeatState
 					if(thesongnamename == 'chosen') {
 						new FlxTimer().start(1, function(tmr:FlxTimer)
 						{
-							startMP4vid('fight_cutscene');
+							startVideo('fight_cutscene');
 						});
 					} else {
 						PlayState.storyDifficulty = 2;
@@ -106,7 +106,7 @@ class WarningState extends MusicBeatState
 						if(thesongnamename == 'chosen') {
 							new FlxTimer().start(1, function(tmr:FlxTimer)
 							{
-								startMP4vid('fight_cutscene');
+								startVideo('fight_cutscene');
 							});
 						} else {
 							PlayState.storyDifficulty = 2;
@@ -126,17 +126,43 @@ class WarningState extends MusicBeatState
 		super.update(elapsed);
    }
    
-   function startMP4vid(name:String)
-   {
-	   
-	   var video:MP4Handler = new MP4Handler();
-	   video.playMP4(Paths.video(name));
-	   video.finishCallback = function()
-	   {
+   public function startVideo(name:String)
+	{
+		#if VIDEOS_ALLOWED
+		inCutscene = true;
+
+		var filepath:String = Paths.video(name);
+		#if sys
+		if(!FileSystem.exists(filepath))
+		#else
+		if(!OpenFlAssets.exists(filepath))
+		#end
+		{
+			FlxG.log.warn('Couldnt find video file: ' + name);
+		    PlayState.storyDifficulty = 2;
+			PlayState.secret = true;
+		   	LoadingState.loadAndSwitchState(new PlayState());
+			return;
+		}
+
+		var video:FlxVideo = new FlxVideo();
+		video.load(filepath);
+		video.play();
+		video.onEndReached.add(function()
+		{
+			video.dispose();
 			PlayState.storyDifficulty = 2;
 			PlayState.secret = true;
 		   	LoadingState.loadAndSwitchState(new PlayState());
-	   }
-	   isCutscene = true;
-   }
+			return;
+		}, true);
+
+		#else
+		FlxG.log.warn('Platform not supported!');
+		PlayState.storyDifficulty = 2;
+			PlayState.secret = true;
+		   	LoadingState.loadAndSwitchState(new PlayState());
+		return;
+		#end
+	}
 }

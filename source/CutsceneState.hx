@@ -1,10 +1,9 @@
 import flixel.FlxG;
 import flixel.FlxSprite;
+import openfl.utils.Assets as OpenFlAssets;
 
 class CutsceneState extends MusicBeatState
 {
-	public var handler:MP4Handler;
-
 	public var path:String = "";
 
 	public function new(bruh)
@@ -13,28 +12,42 @@ class CutsceneState extends MusicBeatState
 		super();
 	}
 
-	public function load()
-	{
-		handler = new MP4Handler();
-	}
-
-	public override function update(elapsed)
-	{
-		if (FlxG.keys.justPressed.ENTER)
-		{
-			handler.kill();
-			MusicBeatState.switchState(new PlayState());
-		}
-		super.update(elapsed);
-	}
-
 	public override function create()
 	{
-		handler.playMP4(Paths.video(path));
-		handler.finishCallback = function()
-		{
-			MusicBeatState.switchState(new PlayState());
-		};
+		startVideo(path);
 		super.create();
+	}
+	
+	public function startVideo(name:String)
+	{
+		#if VIDEOS_ALLOWED
+
+		var filepath:String = Paths.video(name);
+		#if sys
+		if(!FileSystem.exists(filepath))
+		#else
+		if(!OpenFlAssets.exists(filepath))
+		#end
+		{
+			FlxG.log.warn('Couldnt find video file: ' + name);
+			MusicBeatState.switchState(new PlayState());
+			return;
+		}
+
+		var video:FlxVideo = new FlxVideo();
+		video.load(filepath);
+		video.play();
+		video.onEndReached.add(function()
+		{
+			video.dispose();
+			MusicBeatState.switchState(new PlayState());
+			return;
+		}, true);
+
+		#else
+		FlxG.log.warn('Platform not supported!');
+		MusicBeatState.switchState(new PlayState());
+		return;
+		#end
 	}
 }
