@@ -148,7 +148,8 @@ class CodeStateNew extends MusicBeatState
 		glitchEffect.scrollFactor.set();
 		glitchEffect.screenCenter();
 		
-		addTouchPad("NONE", "A_B");
+		addTouchPad("NONE", "B");
+		addTouchPadCamera();
 	}
 	
 	override public function update(elapsed:Float)
@@ -157,7 +158,7 @@ class CodeStateNew extends MusicBeatState
 		{
 			FlxG.sound.play(Paths.sound('keyboardPress'));
 		}
-		else if (controls.BACK)
+		else if (controls.BACK || touchPad.buttonB.justPressed)
 		{
 			FlxG.sound.play(Paths.sound('cancelMenu'));
 			MusicBeatState.switchState(new MainMenuState());
