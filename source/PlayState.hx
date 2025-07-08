@@ -2695,7 +2695,7 @@ class PlayState extends MusicBeatState
 		
 		FlxG.mouse.visible = true;
 
-		if(FlxG.keys.justPressed.SPACE && attacking && canDodge) {
+		if((FlxG.keys.justPressed.SPACE || MusicBeatState.getState().mobileControls.buttonExtra.justPressed) && attacking && canDodge) {
 			dodged = true; 
 			canDodge = false;
 			new FlxTimer().start(1, function(tmr:FlxTimer) {
@@ -2732,7 +2732,7 @@ class PlayState extends MusicBeatState
 				spr.x -= 1000;
 			});
 	
-			if (FlxG.keys.justPressed.SPACE && canDodge)
+			if ((FlxG.keys.justPressed.SPACE || MusicBeatState.getState().mobileControls.buttonExtra.justPressed) && canDodge)
 				{
 					boyfriend.playAnim('dodge', true);
 					new FlxTimer().start(0.1, function(tmr:FlxTimer) {
@@ -5042,7 +5042,7 @@ class PlayState extends MusicBeatState
 			}
 		function detectSpace()
 		{
-			if (FlxG.keys.justPressed.SPACE)
+			if (FlxG.keys.justPressed.SPACE || MusicBeatState.getState().mobileControls.buttonExtra.justPressed)
 			{
 				pressCounter += 1;
 				trace('tap');
