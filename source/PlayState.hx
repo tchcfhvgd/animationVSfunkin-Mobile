@@ -2695,7 +2695,7 @@ class PlayState extends MusicBeatState
 		
 		FlxG.mouse.visible = true;
 
-		if((FlxG.keys.justPressed.SPACE || MusicBeatState.getState().mobileControls.buttonExtra.justPressed) && attacking && canDodge) {
+		if((FlxG.keys.justPressed.SPACE || MusicBeatState.getState().mobileControls.buttonExtra.justPressed) && attacking && canDodge && qqqeb) {
 			dodged = true; 
 			canDodge = false;
 			new FlxTimer().start(1, function(tmr:FlxTimer) {
