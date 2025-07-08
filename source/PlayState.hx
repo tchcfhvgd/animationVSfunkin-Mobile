@@ -1008,7 +1008,7 @@ class PlayState extends MusicBeatState
 					animatedbg.screenCenter();
 				} else {
 					var video:FlxVideoSprite = new FlxVideoSprite(620, 330);
-		            video.load(Paths.video('animatedbg'));
+		            video.load(Paths.video('animatedbg'), true);
 		            video.play();
 		            video.scale.set(2.7, 2.7);
 				    //video.screenCenter();
@@ -1060,7 +1060,7 @@ class PlayState extends MusicBeatState
 					fallenbg.screenCenter();
 				} else {
 					var video:FlxVideoSprite = new FlxVideoSprite(620, 330);
-		            video.load(Paths.video('animatedbg'));
+		            video.load(Paths.video('fallingbg'), true);
 		            video.play();
 		            video.scale.set(2.7, 2.7);
 				    //video.screenCenter();
