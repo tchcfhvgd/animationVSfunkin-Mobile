@@ -370,7 +370,7 @@ class PlayState extends MusicBeatState
 	
 	public static var qqqeb:Bool = false;
 	
-	public static final looping:String = ':input-repeat=65535';
+	public final looping:String = ':input-repeat=65535';
 	
 	override public function create()
 	{
@@ -1012,7 +1012,7 @@ class PlayState extends MusicBeatState
 					var video:FlxVideoSprite = new FlxVideoSprite(620, 330);
 		            video.load(Paths.video('animatedbg'), [looping]);
 		            video.play();
-		            video.scale.set(2.7, 2.7);
+		            video.scale.set(2, 2);
 				    //video.screenCenter();
 				    video.y -= 350;
 				    video.x -= 600;
@@ -1064,7 +1064,7 @@ class PlayState extends MusicBeatState
 					var video:FlxVideoSprite = new FlxVideoSprite(620, 330);
 		            video.load(Paths.video('fallingbg'), [looping]);
 		            video.play();
-		            video.scale.set(2.7, 2.7);
+		            video.scale.set(2, 2);
 				    //video.screenCenter();
 				    video.y -= 350;
 				    video.x -= 600;

@@ -108,9 +108,11 @@ class CodeStateNew extends MusicBeatState
 							save.flush();
 							FlxG.log.add("Settings saved!");
 						case 'bloxiam':
+							removeTouchPad();
 							openSubState(new BloxiamSubstate());
 							codeInput.hasFocus = false;
 						case 'pruimauam':
+							removeTouchPad();
 							openSubState(new PruimauamSubstate());
 							codeInput.hasFocus = false;
 						case 'an baker':
@@ -154,6 +156,8 @@ class CodeStateNew extends MusicBeatState
 	
 	override public function update(elapsed:Float)
 	{
+		super.update(elapsed);
+		
 		if (FlxG.keys.justPressed.BACKSPACE)
 		{
 			FlxG.sound.play(Paths.sound('keyboardPress'));
