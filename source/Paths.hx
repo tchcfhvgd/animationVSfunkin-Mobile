@@ -181,6 +181,11 @@ class Paths
 		return getPath(file, type, library);
 	}
 
+	inline static public function lowhpmusic(song:String)
+	{
+		return 'songs:assets/songs/${song.toLowerCase()}/InstLowHP.$SOUND_EXT';
+	}
+	
 	inline static public function txt(key:String, ?library:String)
 	{
 		return getPath('data/$key.txt', TEXT, library);
