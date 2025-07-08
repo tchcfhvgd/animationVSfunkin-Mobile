@@ -108,11 +108,13 @@ class CodeStateNew extends MusicBeatState
 							save.flush();
 							FlxG.log.add("Settings saved!");
 						case 'bloxiam':
-							removeTouchPad();
+							//removeTouchPad();
+							touchPad.active = touchPad.visible = persistentUpdate = false;
 							openSubState(new BloxiamSubstate());
 							codeInput.hasFocus = false;
 						case 'pruimauam':
-							removeTouchPad();
+							//removeTouchPad();
+							touchPad.active = touchPad.visible = persistentUpdate = false;
 							openSubState(new PruimauamSubstate());
 							codeInput.hasFocus = false;
 						case 'an baker':
