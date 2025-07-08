@@ -109,12 +109,12 @@ class CodeStateNew extends MusicBeatState
 							FlxG.log.add("Settings saved!");
 						case 'bloxiam':
 							//removeTouchPad();
-							touchPad.active = touchPad.visible = persistentUpdate = false;
+							touchPad.active = touchPad.visible = false;
 							openSubState(new BloxiamSubstate());
 							codeInput.hasFocus = false;
 						case 'pruimauam':
 							//removeTouchPad();
-							touchPad.active = touchPad.visible = persistentUpdate = false;
+							touchPad.active = touchPad.visible = false;
 							openSubState(new PruimauamSubstate());
 							codeInput.hasFocus = false;
 						case 'an baker':
@@ -262,6 +262,8 @@ class BloxiamSubstate extends MusicBeatSubstate
 			FlxG.sound.play(Paths.sound('cancelMenu'));
 		    MusicBeatState.switchState(new CodeStateNew());
 		}
+		
+		super.update(elapsed);
 	}
 }
 
@@ -288,5 +290,7 @@ class PruimauamSubstate extends MusicBeatSubstate
 			FlxG.sound.play(Paths.sound('cancelMenu'));
 		    MusicBeatState.switchState(new CodeStateNew());
 		}
+		
+		super.update(elapsed);
 	}
 }
