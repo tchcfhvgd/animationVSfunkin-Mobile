@@ -1917,7 +1917,6 @@ class PlayState extends MusicBeatState
 	public function startEndVideo(name:String)
 	{
 		#if VIDEOS_ALLOWED
-		inCutscene = true;
 
 		var filepath:String = Paths.video(name);
 		#if sys

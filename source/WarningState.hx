@@ -129,7 +129,7 @@ class WarningState extends MusicBeatState
    public function startVideo(name:String)
 	{
 		#if VIDEOS_ALLOWED
-		inCutscene = true;
+		isCutscene = true;
 
 		var filepath:String = Paths.video(name);
 		#if sys
