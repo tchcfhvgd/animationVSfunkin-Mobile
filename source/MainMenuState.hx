@@ -262,6 +262,13 @@ class MainMenuState extends MusicBeatState
 		text.scrollFactor.set();
 		add(text); //XD*/
 
+		if(huhthing) {
+		addTouchPad("UP_DOWN", "A_B_C");
+		}else{
+		addTouchPad("LEFT_FULL", "A_B_C");
+		}
+		
+		
 		super.create();
 	}
 
@@ -276,12 +283,21 @@ class MainMenuState extends MusicBeatState
 
 	var selectedSomethin:Bool = false;
 
-	
+	override function closeSubState() {
+		persistentUpdate = true;
+		removeTouchPad();
+		if(huhthing) {
+		addTouchPad("UP_DOWN", "A_B_C");
+		}else{
+		addTouchPad("LEFT_FULL", "A_B_C");
+		}
+		super.closeSubState();
+	}
 
 	override function update(elapsed:Float)
 	{
 		
-		var ctrl = FlxG.keys.justPressed.CONTROL;
+		var ctrl = FlxG.keys.justPressed.CONTROL || touchPad.buttonC.justPressed;
 		
 		if (FlxG.sound.music.volume < 0.8)
 		{
@@ -390,7 +406,7 @@ class MainMenuState extends MusicBeatState
 			
 			if(ctrl && curSelected == 0)
 			{
-				persistentUpdate = false;
+				touchPad.active = touchPad.visible = persistentUpdate = false;
 				openSubState(new GameplayChangersSubstate());
 			}
 		}

@@ -118,6 +118,9 @@ class HintState extends MusicBeatState
         chosenText.cameras = [camChosen];
 
         trace('hints lol');
+        
+        addTouchPad("NONE", "A");
+		addTouchPadCamera();
     }
 
     override function update(elapsed:Float)

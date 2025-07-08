@@ -26,13 +26,16 @@ class PirateState extends MusicBeatState
 		warnText = new FlxText(0, 0, FlxG.width,
 			"Hey there person man/woman  \n
 			Why are you playing on a website? Go get the actual game please,\n
-			Please press enter to go to the gamebanana page,\n
+			Please press A to go to the gamebanana page,\n
 			\n
 			Thank you B)",
 			32);
 		warnText.setFormat("VCR OSD Mono", 32, FlxColor.WHITE, CENTER);
 		warnText.screenCenter(Y);
 		add(warnText);
+		
+		addTouchPad("NONE", "A");
+		addTouchPadCamera();
 	}
 
 	override function update(elapsed:Float)

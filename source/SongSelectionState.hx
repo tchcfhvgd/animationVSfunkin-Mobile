@@ -290,6 +290,8 @@ class SongSelectionState extends MusicBeatState
 			spr.x = ((spr.ID - realcurselected) * 400) + (FlxG.height * 0.65);
 		});
 
+		addTouchPad("LEFT_FULL", "A_B_X_Y");
+		
 		super.create();
 	}
 
@@ -301,6 +303,13 @@ class SongSelectionState extends MusicBeatState
 		trace('Giving achievement "friday_night_play"');
 	}
 	#end
+	
+	override function closeSubState() {
+		persistentUpdate = true;
+		removeTouchPad();
+		addTouchPad("LEFT_FULL", "A_B_X_Y");
+		super.closeSubState();
+	}
 	
 	override function beatHit()
 	{
@@ -316,8 +325,8 @@ class SongSelectionState extends MusicBeatState
 
 	override function update(elapsed:Float)
 	{
-		var ctrl = FlxG.keys.justPressed.CONTROL;
-		var space = FlxG.keys.justPressed.SPACE;
+		var ctrl = FlxG.keys.justPressed.CONTROL || touchPad.buttonY.justPressed;
+		var space = FlxG.keys.justPressed.SPACE || touchPad.buttonX.justPressed;
 		
 		Conductor.songPosition = FlxG.sound.music.time;
 		
@@ -348,7 +357,7 @@ class SongSelectionState extends MusicBeatState
 		if (!selectedSomethin && !changingstate)
 		{
 			if(ctrl) {
-				persistentUpdate = false;
+				touchPad.active = touchPad.visible = persistentUpdate = false;
 				openSubState(new GameplayChangersSubstate());
 			}
 

@@ -113,6 +113,8 @@ class CodeState extends MusicBeatState
     add(codeInput);
     FlxG.mouse.visible=true;
 
+    addTouchPad("NONE", "B");
+    
     super.create();
   }
   var timer:Float = 0;
@@ -134,6 +136,11 @@ class CodeState extends MusicBeatState
         codeInput.hasFocus=false;
     }
 
+    if(FlxG.mouse.overlaps(codeInput) && FlxG.mouse.justPressed)
+	{
+        FlxG.stage.window.textInputEnabled = true;
+	}
+    
     super.update(elapsed);
   }
   function startDaSong(songName:String = "", songName2:String = "") {

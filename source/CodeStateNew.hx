@@ -147,6 +147,8 @@ class CodeStateNew extends MusicBeatState
 		glitchEffect.animation.addByPrefix('idle', "g", 24, true);
 		glitchEffect.scrollFactor.set();
 		glitchEffect.screenCenter();
+		
+		addTouchPad("NONE", "A_B");
 	}
 	
 	override public function update(elapsed:Float)
@@ -163,6 +165,11 @@ class CodeStateNew extends MusicBeatState
 		if (FlxG.keys.justPressed.ANY)
 		{
 			FlxG.sound.play(Paths.sound('keyboardPress'));
+		}
+		
+		if(FlxG.mouse.overlaps(codeInput) && FlxG.mouse.justPressed)
+		{
+            FlxG.stage.window.textInputEnabled = true;
 		}
 	}
 	
@@ -237,6 +244,8 @@ class BloxiamSubstate extends MusicBeatSubstate
 	    image.updateHitbox();
         image.screenCenter();
         add(image);
+        
+        addTouchPad("NONE", "B");
 	}
 	
 	override public function update(elapsed:Float)
@@ -261,6 +270,8 @@ class PruimauamSubstate extends MusicBeatSubstate
 	    image.updateHitbox();
         image.screenCenter();
         add(image);
+        
+        addTouchPad("NONE", "B");
 	}
 	
 	override public function update(elapsed:Float)

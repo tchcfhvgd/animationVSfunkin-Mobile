@@ -168,6 +168,8 @@ class NewCreditsState extends MusicBeatState
         nameText.x = namebgx + 10;
         nameText.y = namebgy + 5;
 
+		addTouchPad("LEFT_RIGHT", "A_B");
+		
 		super.create();
 	}
 

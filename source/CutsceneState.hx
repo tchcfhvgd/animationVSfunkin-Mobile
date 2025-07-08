@@ -22,6 +22,11 @@ class CutsceneState extends MusicBeatState
 	{
 		#if VIDEOS_ALLOWED
 
+		if (FlxG.sound.music != null)
+		{
+			FlxG.sound.music.stop();
+		}
+		
 		var filepath:String = Paths.video(name);
 		#if sys
 		if(!FileSystem.exists(filepath))

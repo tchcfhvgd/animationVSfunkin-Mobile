@@ -38,7 +38,7 @@ class WarningState extends MusicBeatState
 		if(thesongnamename != 'vengeance') {
 			text = "Hey there person man/woman   \n
 			This song contains an animated background and it may cause a headache,\n
-			Press Esc if you want to disable it or press Enter if you don't wanna disable it,\n
+			Press B if you want to disable it or press A if you don't wanna disable it,\n
 			\n
 			Hope you enjoy this song";
 		}
@@ -46,12 +46,18 @@ class WarningState extends MusicBeatState
 		warnText.setFormat("VCR OSD Mono", 32, FlxColor.WHITE, CENTER);
 		warnText.screenCenter(Y);
 		add(warnText);
+		
+		if(thesongnamename == 'vengeance') {
+		addTouchPad("NONE", "A");
+		}else{
+		addTouchPad("NONE", "A_B");
+		}
 	}
 
 	override function update(elapsed:Float)
 	{
 		if(thesongnamename == 'vengeance') {
-			if (FlxG.keys.justPressed.ANY) {
+			if (controls.ACCEPT) {
 				PlayState.animatedbgdisable = false;
 				FlxG.sound.play(Paths.sound('cancelMenu'));
 				PlayState.SONG = Song.loadFromJson(thesongnamename, thesongnamename);
@@ -130,6 +136,11 @@ class WarningState extends MusicBeatState
 	{
 		#if VIDEOS_ALLOWED
 		isCutscene = true;
+		
+		if (FlxG.sound.music != null)
+		{
+			FlxG.sound.music.stop();
+		}
 
 		var filepath:String = Paths.video(name);
 		#if sys
