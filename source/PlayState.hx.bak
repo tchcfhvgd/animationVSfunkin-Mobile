@@ -1350,12 +1350,6 @@ class PlayState extends MusicBeatState
 
 		// startCountdown();
 
-		switch(Paths.formatToSongPath(SONG.song))
-		{
-			case 'vengeance':
-			    qqqeb = true;
-		}
-		
 		#if !android
 		addTouchPad("NONE", "P");
 		addTouchPadCamera();
@@ -1366,6 +1360,12 @@ class PlayState extends MusicBeatState
 		{
 		mobileControls.onButtonDown.add(onButtonPress);
 		mobileControls.onButtonUp.add(onButtonRelease);
+		}
+		
+		switch(Paths.formatToSongPath(SONG.song))
+		{
+			case 'vengeance':
+			    qqqeb = true;
 		}
 		
 		generateSong(SONG.song);
