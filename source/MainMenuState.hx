@@ -262,7 +262,7 @@ class MainMenuState extends MusicBeatState
 		text.scrollFactor.set();
 		add(text); //XD*/
 
-		if(huhthing) {
+		if(!huhthing) {
 		addTouchPad("UP_DOWN", "A_B_C");
 		}else{
 		addTouchPad("LEFT_FULL", "A_B_C");
@@ -286,7 +286,7 @@ class MainMenuState extends MusicBeatState
 	override function closeSubState() {
 		persistentUpdate = true;
 		removeTouchPad();
-		if(huhthing) {
+		if(!huhthing) {
 		addTouchPad("UP_DOWN", "A_B_C");
 		}else{
 		addTouchPad("LEFT_FULL", "A_B_C");

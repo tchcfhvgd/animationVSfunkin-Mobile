@@ -368,6 +368,8 @@ class PlayState extends MusicBeatState
 
 	public static var secret:Bool;
 	
+	public static var qqqeb:Bool = false;
+	
 	override public function create()
 	{
 		var save:FlxSave = new FlxSave();
@@ -386,8 +388,8 @@ class PlayState extends MusicBeatState
 			case 'vengeance':
 				health = 2; 
 			case 'chosen':
-				FlxG.save.data.framerate = 240;
-				FlxG.updateFramerate = 240;
+				//FlxG.save.data.framerate = 240;
+				//FlxG.updateFramerate = 240;
 		}
 
 		ShadersHandler.setChrome(0.0);
@@ -1356,6 +1358,12 @@ class PlayState extends MusicBeatState
 		{
 		mobileControls.onButtonDown.add(onButtonPress);
 		mobileControls.onButtonUp.add(onButtonRelease);
+		}
+		
+		switch(Paths.formatToSongPath(SONG.song))
+		{
+			case 'vengeance':
+			    qqqeb = true;
 		}
 		
 		generateSong(SONG.song);
@@ -5355,6 +5363,9 @@ class PlayState extends MusicBeatState
 			FlxG.stage.removeEventListener(KeyboardEvent.KEY_DOWN, onKeyPress);
 			FlxG.stage.removeEventListener(KeyboardEvent.KEY_UP, onKeyRelease);
 		}
+		
+		qqqeb = false;
+		
 		super.destroy();
 	}
 
